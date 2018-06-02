@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Carros Web</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<div id="container">
+		<header>
+			<h1 data-js="site-information"></h1> <span data-js="site-information"></span>
+		</header>
+
+		<div id="area">
+			<form data-js="form" id="formulario">
+				<fieldset>
+					<legend>Cadastro de Veículo</legend>
+					<label for="inputUrl">Imagem do carro: </label><input type="url" name="inputUrl" class="input">
+					<label for="inputBrand">Marca / Modelo: </label><input type="text" name="inputBrand" class="input">
+					<label for="inputYear">Ano: </label><input type="number" name="inputYear" class="input">
+					<label for="inputPlate">Placa: </label><input type="text" name="inputPlate" class="input">
+					<label for="inputColor">Cor: </label><input type="text" name="inputColor" class="input">
+					<button type="submit" class="btn-submit">Cadastrar Veículo</button>
+				</fieldset>
+			</form>
+		</div>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Imagem do Carro</th>
+					<th>Marca / Modelo</th>
+					<th>Ano</th>
+					<th>Placa</th>
+					<th>Cor</th>
+				</tr>
+			</thead>
+			<tbody data-js="body-table"></tbody>
+		</table>
+	</div>
+	<script src="js/dom.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
