@@ -8,6 +8,12 @@ body {
   margin: auto;
 }
 
+h1 {
+  display: inline-block;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
 #area  {
   width: 40%;
   display: inline-block;
@@ -62,14 +68,17 @@ table, td, th {
   padding: 10px;
 }
 
-h1 {
-  display: inline-block;
-  font-family: sans-serif;
-  text-transform: uppercase;
-}
-
 img {
   width: 50px
+}
+
+a {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: red;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
 input:-webkit-autofill {

@@ -1,4 +1,4 @@
-(function($) {
+(function($, document) {
 
   'use strict';
 
@@ -6,22 +6,68 @@
     var $informationSite = $('[data-js="site-information"]');
     var $form = $('[data-js="form"]');
     var $tableBody = $('[data-js="body-table"]');
+    var $tdRemove = '';
+    var $th = $('[data-js="th-table"]');
     var $fragment = document.createDocumentFragment('tr');
     var ajax = new XMLHttpRequest();
 
     $informationSite.on('load', handleInformationSite);
     $form.on('submit', handleFormCar);
-
-    function handleFormCar(event) {
-      event.preventDefault();
-      $tableBody.get().appendChild(createDataTableFragment());
-      clearForm();
-    }
-
+    
     function handleInformationSite() {
       ajax.open('GET', '/js/company.json');
       ajax.send();
       ajax.addEventListener('readystatechange', handleReadyStateChange);
+    }
+
+    function handleFormCar(event) {
+      event.preventDefault();
+      $tableBody.get().appendChild(createDataTableFragment());
+      handleLineTable();
+      clearForm();
+    }
+    
+    function handleLineTable() {
+      $tdRemove = $('[data-js="tdRemove"]');
+      $tdRemove.on('click', removeLineTable);
+    }
+
+    function removeLineTable(event) {
+      event.preventDefault();
+      var $lineTable = this.parentNode.parentNode;
+      $lineTable.parentNode.removeChild($lineTable);
+    }
+
+    function createDataTableFragment() {
+      $fragment.appendChild(handleDataTable());
+      return $fragment;
+    }
+
+    function handleDataTable() {
+      var $tr = createElement('tr');
+      $tr.innerHTML = createTds();
+      return $tr;
+    }
+
+    function createTds() {
+      var $tds = '';
+      var $inputsForm = filterForm();
+      $th.forEach(function(item, index){
+        if (!$inputsForm[index]) {
+          $tds += '<td><a href="#" data-js="tdRemove">X</a></td>';
+          return;
+        }
+        $tds += $inputsForm[index].type === 'url' 
+        ? '<td><img src="' + $inputsForm[index].value + '"></td>'
+        : '<td>' + $inputsForm[index].value + '</td>';
+      });
+      return $tds;
+    }
+    
+    function filterForm() {
+      return $form.filter(function(item) {
+        return item.nodeName == 'INPUT';
+      });
     }
 
     function handleReadyStateChange() {
@@ -32,42 +78,14 @@
       }
     }
 
-    function createDataTableFragment() {
-      $fragment.appendChild(handleDataTable());
-      return $fragment;
-    }
-
-    function handleDataTable() {
-      var $tr = createElement('tr');
-      var $tdImage = createElement('td');
-      var $tdBrand = createElement('td');
-      var $tdYear = createElement('td');
-      var $tdPlate = createElement('td');
-      var $tdColor = createElement('td');
-      var $image = createElement('img');
-
-      $image.setAttribute('src', $form.get()[1].value);
-      $tdImage.appendChild($image);
-      $tdBrand.textContent = $form.get()[2].value;
-      $tdYear.textContent = clearAge();
-      $tdPlate.textContent = $form.get()[4].value;
-      $tdColor.textContent = $form.get()[5].value;
-
-      $tr.appendChild($tdImage);
-      $tr.appendChild($tdBrand);
-      $tr.appendChild($tdYear);
-      $tr.appendChild($tdPlate);
-      $tr.appendChild($tdColor);
-
-      return $tr;
+    function isRequestOk() {
+      return ajax.readyState == 4 && ajax.status == 200;
     }
 
     function clearForm() {
-      $form.get()[1].value = '';
-      $form.get()[2].value = '';
-      $form.get()[3].value = '';
-      $form.get()[4].value = '';
-      $form.get()[5].value = '';
+      $form.forEach(function(item) {
+        item.value = '';
+      });
     }
 
     function clearAge() {
@@ -82,10 +100,6 @@
       return JSON.parse(ajax.responseText);
     }
 
-    function isRequestOk() {
-      return ajax.readyState == 4 && ajax.status == 200;
-    }
-
     return {
       init: handleInformationSite
     }
@@ -93,4 +107,4 @@
 
   app.init();
 
-})(window.DOM);
+})(window.DOM, document);
