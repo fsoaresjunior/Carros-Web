@@ -22,6 +22,10 @@
   };
 
   DOM.prototype.get = function get() {
+    return DOM.prototype.verifyElements.call(this);
+  };
+
+  DOM.prototype.verifyElements = function verifyElements() {
     if (this.element.length === 1) {
       return this.element[0];
     }
@@ -29,31 +33,31 @@
   };
 
   DOM.prototype.forEach = function forEach() {
-    return Array.prototype.forEach.apply(this.element, arguments);
+    return Array.prototype.forEach.apply(this.get(), arguments);
   };
 
   DOM.prototype.map = function map() {
-    return Array.prototype.map.apply(this.element, arguments);
+    return Array.prototype.map.apply(this.get(), arguments);
   };
 
   DOM.prototype.filter = function filter() {
-    return Array.prototype.filter.apply(this.element, arguments);
+    return Array.prototype.filter.apply(this.get(), arguments);
   };
 
   DOM.prototype.reduce = function reduce() {
-    return Array.prototype.reduce.apply(this.element, arguments);
+    return Array.prototype.reduce.apply(this.get(), arguments);
   };
 
   DOM.prototype.reduceRight = function reduceRight() {
-    return Array.prototype.reduceRight.apply(this.element, arguments);
+    return Array.prototype.reduceRight.apply(this.get(), arguments);
   };
 
   DOM.prototype.every = function every() {
-    return Array.prototype.every.apply(this.element, arguments);
+    return Array.prototype.every.apply(this.get(), arguments);
   };
 
   DOM.prototype.some = function some() {
-    return Array.prototype.some.apply(this.element, arguments);
+    return Array.prototype.some.apply(this.get(), arguments);
   };
 
   DOM.prototype.is = function is(arg) {
