@@ -60,36 +60,36 @@
     return Array.prototype.some.apply(this.get(), arguments);
   };
 
-  DOM.prototype.is = function is(arg) {
+  DOM.is = function is(arg) {
     return Object.prototype.toString.call(arg);
   };
 
-  DOM.prototype.isArray = function isArray(arg) {
-    return DOM.prototype.is(arg) === '[object Array]';
+  DOM.isArray = function isArray(arg) {
+    return DOM.is(arg) === '[object Array]';
   };
 
-  DOM.prototype.isObject = function isObject(arg) {
-    return DOM.prototype.is(arg) === '[object Object]';
+  DOM.isObject = function isObject(arg) {
+    return DOM.is(arg) === '[object Object]';
   };
 
-  DOM.prototype.isFunction = function isFunction(arg) {
-    return DOM.prototype.is(arg) === '[object Function]';
+  DOM.isFunction = function isFunction(arg) {
+    return DOM.is(arg) === '[object Function]';
   };
 
-  DOM.prototype.isNumber = function isNumber(arg) {
-    return DOM.prototype.is(arg) === '[object Number]';
+  DOM.isNumber = function isNumber(arg) {
+    return DOM.is(arg) === '[object Number]';
   };
 
-  DOM.prototype.isString = function isString(arg) {
-    return DOM.prototype.is(arg) === '[object String]';
+  DOM.isString = function isString(arg) {
+    return DOM.is(arg) === '[object String]';
   };
 
-  DOM.prototype.isBoolean = function isBoolean(arg) {
-    return DOM.prototype.is(arg) === '[object Boolean]';
+  DOM.isBoolean = function isBoolean(arg) {
+    return DOM.is(arg) === '[object Boolean]';
   };
 
-  DOM.prototype.isNull = function isNull(arg) {
-    return DOM.prototype.is(arg) === '[object Null]' || DOM.prototype.is(arg) === '[object Undefined]';
+  DOM.isNull = function isNull(arg) {
+    return DOM.is(arg) === '[object Null]' || DOM.is(arg) === '[object Undefined]';
   };
 
   window.DOM = DOM;
